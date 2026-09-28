@@ -111,7 +111,7 @@ One page is generated per entry in `src/data/properties.ts`. Unknown slugs retur
 1. **Animations.** The client will describe these as we go; implement them per `docs/animations.md`.
 2. **Real content.** Collect the items in section 5 from the owner and fill in `properties.ts`, `site.ts` and `public/images/`.
 3. **Visual check on a real phone.** Desktop behaviour was verified by driving Firefox with puppeteer (section nav, price bar, speed dial, booking message). Check touch devices, especially the speed dial on short phones (with 5 icons, the open stack can reach the header on screens under ~700px tall).
-4. **Version control.** `git` isn't installed. Install it (`sudo apt install git`), run `git init` and commit.
+4. ~~**Version control.**~~ Done 2026-09-28: private repo [Akelo-Shaul/bnb-site](https://github.com/Akelo-Shaul/bnb-site), branch `main`. Make it public only once the media licences are confirmed (see §5).
 5. **Deploy.** See `docs/setup.md`. Vercel is simplest; set the `NEXT_PUBLIC_*` env vars there.
 6. **SEO & sharing.** Set `NEXT_PUBLIC_SITE_URL`; add a favicon/app icon, an Open Graph image for the home page, and optionally `sitemap.ts` / `robots.ts` and LodgingBusiness JSON-LD.
 7. **Nice-to-haves** (not requested yet):

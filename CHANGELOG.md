@@ -18,6 +18,7 @@
 - TikTok restored (it had been removed): icon back in the speed dial and footer with a placeholder handle (`NEXT_PUBLIC_TIKTOK_HANDLE`). Deleted Figma icons restored.
 - Speed dial: each icon shows an instruction label ("Book on WhatsApp", "Watch us on TikTok", …); the closed "?" shows "Contact & book" on hover.
 - Photo tour redesigned to match Airbnb's: 1400px layout, room thumbnails (183×120), per-room sections with a sticky title column (1/3) and media column (2/3) in a repeating [big + two stacked] / [two side by side] pattern. Rooms now include **videos** (autoplay muted while on screen, ▶ badge), which the lightbox also plays (with controls). Placeholder media is reused across rooms.
+- Project pushed to GitHub: private repo `Akelo-Shaul/bnb-site`.
 - Next: more client-specified GSAP animations, real content (see `docs/project-status.md`).
 
 ## 0.1.0 — 2026-09-28
