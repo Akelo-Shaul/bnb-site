@@ -9,7 +9,7 @@ Set these in `.env.local` (or the hosting provider's environment variables):
 | `NEXT_PUBLIC_WHATSAPP_NUMBER` | `254115089122` (default) | Every "Book" / WhatsApp link (digits only, country code, no leading 0) |
 | `NEXT_PUBLIC_INSTAGRAM_HANDLE` | `official_shaul_` (default) | Instagram profile + DM links |
 | `NEXT_PUBLIC_TIKTOK_HANDLE` | `shalomgardens` (**placeholder**) | TikTok icon in the speed dial and footer |
-| `NEXT_PUBLIC_SITE_URL` | `https://shalomgardens.co.ke` | Social share previews |
+| `NEXT_PUBLIC_SITE_URL` | `https://shalomgardens.co.ke` | Social share previews + listing link in booking messages. Optional: if empty/unset it falls back to the Vercel production domain, then localhost; a bare domain gets `https://` added (`src/lib/site-url.ts`). |
 
 Speed-dial order: WhatsApp, TikTok, Instagram, then the `socials` list. Each entry has a `hint` (the instruction label shown beside the icon). Other social profiles (YouTube, LinkedIn, X) are the `socials` list in `src/data/site.ts`: add, remove or reorder entries there and both the speed dial and footer update. Icons live in `public/icons/` (50×50 SVG). The footer "Crafted by" credit is `site.credit`.
 

@@ -1,5 +1,6 @@
 import { site } from "@/data/site";
 import { formatPrice, nightsBetween, plural } from "@/lib/format";
+import { publicSiteUrl } from "@/lib/site-url";
 import type { Property } from "@/data/properties";
 
 export function whatsappLink(message?: string) {
@@ -66,8 +67,8 @@ export function bookingMessage({ property, checkIn, checkOut, guests }: BookingR
   }
   if (details.length) lines.push("", ...details.map((d) => `• ${d}`));
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
-  if (property && siteUrl) lines.push("", `Listing: ${siteUrl.replace(/\/$/, "")}/properties/${property.slug}`);
+  const base = publicSiteUrl();
+  if (property && base) lines.push("", `Listing: ${base}/properties/${property.slug}`);
 
   lines.push("", checkIn && checkOut ? "Is it available for these dates?" : "Which dates are available?");
   return lines.join("\n");

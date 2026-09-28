@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Instrument_Sans, Iosevka_Charon_Mono } from "next/font/google";
 import { site } from "@/data/site";
+import { siteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 const inter = Inter({
@@ -22,7 +23,7 @@ const iosevka = Iosevka_Charon_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  metadataBase: siteUrl(),
   title: {
     default: `${site.name} | Short stays in Kisumu`,
     template: `%s | ${site.name}`,

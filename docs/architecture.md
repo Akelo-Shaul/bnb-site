@@ -33,6 +33,7 @@ components/
 | File | Purpose |
 | --- | --- |
 | `lib/contact.ts` | `whatsappLink`, `whatsappDisplay`, `instagramDmLink`, `instagramProfileLink`, `bookingMessage` (detailed booking text), `formatDate` |
+| `lib/site-url.ts` | `siteUrl()` (safe `metadataBase`) and `publicSiteUrl()` (listing links); never throws on bad env values |
 | `lib/format.ts` | `formatPrice` (Ksh), `nightsBetween`, `plural` |
 | `lib/gsap.ts` | Registers GSAP plugins; exports `gsap`, `ScrollTrigger`, `MorphSVGPlugin`, `useGSAP`, `REDUCED_MOTION` |
 | `hooks/useSavedProperties.ts` | Hearted properties in `localStorage`, synced across components/tabs |
