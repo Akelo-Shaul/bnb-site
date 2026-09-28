@@ -73,8 +73,10 @@ export default async function PropertyPage({ params }: PageProps<"/properties/[s
           <PhotoGrid property={property} />
         </div>
 
-        <div className="mt-10 grid gap-12 lg:grid-cols-[minmax(0,1fr)_373px] lg:gap-20">
-          <div>
+        {/* minmax(0,1fr) on phones: without it the sideways-scrolling rows
+            (e.g. "Where you'll sleep") stretch the page wider than the screen */}
+        <div className="mt-10 grid grid-cols-[minmax(0,1fr)] gap-12 lg:grid-cols-[minmax(0,1fr)_373px] lg:gap-20">
+          <div className="min-w-0">
             <Overview property={property} />
             <AvailabilityCalendar town={property.town} />
           </div>

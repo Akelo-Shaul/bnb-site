@@ -168,20 +168,22 @@ export function PhotoTour({ property }: { property: Property }) {
               <section
                 key={room.room}
                 data-tour-room={room.room}
-                className="mt-16 grid scroll-mt-[76px] gap-6 md:grid-cols-[1fr_2fr] md:gap-0"
+                className="mt-16 grid scroll-mt-[76px] grid-cols-[minmax(0,1fr)] gap-3 md:grid-cols-[1fr_2fr] md:gap-0"
               >
                 {/* Title stays pinned while its photos scroll past */}
-                <h3 className="text-[26px] font-medium md:sticky md:top-[108px] md:self-start">{room.room}</h3>
-                <div className="flex flex-col gap-2.5">
+                <h3 className="sticky top-[76px] z-[5] -mx-6 bg-white px-6 py-3 text-[22px] font-medium md:top-[108px] md:z-auto md:mx-0 md:self-start md:bg-transparent md:px-0 md:py-0 md:text-[26px]">
+                  {room.room}
+                </h3>
+                <div className="flex min-w-0 flex-col gap-1.5 md:gap-2.5">
                   {rows(room.items).map((row) =>
                     row.kind === "trio" ? (
-                      <div key={row.items[0].index} className="grid grid-cols-[614fr_303fr] gap-2.5">
+                      <div key={row.items[0].index} className="grid grid-cols-[minmax(0,614fr)_minmax(0,303fr)] gap-1.5 md:gap-2.5">
                         {tile(row.items[0], room.room, "row-span-2 aspect-[614/818]", "(min-width: 768px) 620px, 66vw")}
                         {tile(row.items[1], room.room, "", "(min-width: 768px) 310px, 33vw")}
                         {tile(row.items[2], room.room, "", "(min-width: 768px) 310px, 33vw")}
                       </div>
                     ) : row.kind === "pair" ? (
-                      <div key={row.items[0].index} className="grid grid-cols-2 gap-2.5">
+                      <div key={row.items[0].index} className="grid grid-cols-2 gap-1.5 md:gap-2.5">
                         {row.items.map((it) => tile(it, room.room, "aspect-[458/560]", "(min-width: 768px) 460px, 50vw"))}
                       </div>
                     ) : (

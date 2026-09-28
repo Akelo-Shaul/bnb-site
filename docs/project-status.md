@@ -88,6 +88,7 @@ One page is generated per entry in `src/data/properties.ts`. Unknown slugs retur
 | Socials = those on shaulakelo.com (Instagram `official_shaul_`, YouTube, LinkedIn, X); TikTok removed; WhatsApp `254115089122` | Client request (2026-09-28). YouTube/LinkedIn/X badge icons were drawn to match the Figma icon style (the Figma file had none). |
 | TikTok kept with a placeholder handle; every speed-dial icon has an instruction label | Client request (2026-09-28): don't delete icons without a link, use a placeholder instead. **Lesson: never remove a design element just because its data is missing.** |
 | Photo tour state lives in the URL (`?modal=photo-tour&photo=N`) instead of a separate route | Same as Airbnb: shareable, the Back button closes it, and the listing stays underneath. Needs a `<Suspense>` boundary because it reads search params on a static page. |
+| Grids that contain sideways-scrolling rows use `grid-cols-[minmax(0,1fr)]` on mobile | A plain `grid` lets its auto column grow to the scroller's full content width; Chrome then widens the whole layout viewport (716px on a 390px phone). Test mobile in **Chrome** with `isMobile`; Firefox headless doesn't show this. |
 | Section nav + price bar on listing pages uses CSS transitions and a scroll listener, not GSAP | It's a UI state toggle, not a described animation. Swap to GSAP if the client wants a custom motion. |
 
 ## 5. Placeholder content (must be replaced before launch)
@@ -126,6 +127,7 @@ One page is generated per entry in `src/data/properties.ts`. Unknown slugs retur
 - `public/icons/heart.svg` and `line.svg` are unused Figma exports, kept on purpose (don't delete design assets).
 - With 6 icons, the open speed dial is ~300px tall on phones and can overlap the header on screens under ~700px tall.
 - `public/icons/contact-support.svg` is no longer referenced (the speed dial draws it inline so it can morph). It's kept as the Figma original.
+- Testing tip: for mobile checks use Chrome (puppeteer-core + `@puppeteer/browsers install chrome-headless-shell`, viewport `isMobile: true`). Layout-viewport overflow only shows up there.
 - Testing tip: headless `firefox --screenshot` always captures from the top of the page and before lazy content loads. For scroll/click states, use puppeteer-core with `browser: "firefox"` (installed outside the project; not a dependency).
 - The listing frame in Figma still contains "Bordeaux"/"Ghazal" placeholder text. If the designer updates that frame, re-check the listing page against it.
 - `next dev` rewrites a block inside `AGENTS.md`; that's expected (see the note in the file).
