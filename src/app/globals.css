@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+/* Design tokens taken from the Figma file (Ratatoulie → Desktop - 1). */
+@theme inline {
+  --color-brand: #ff6f00;
+  --color-brand-dark: #e06200;
+  --color-whatsapp: #06a215;
+  --color-ink: #323232;
+  --color-ink-soft: #3e3e3e;
+  --color-mist: #d9d9d9;
+  --color-tile: #b0b0b0;
+  --color-charcoal: #3e3e3e;
+  --color-footer: #6b6666;
+  --color-muted: #717171;
+  --color-line: #dddddd;
+
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-iosevka);
+  --font-price: var(--font-instrument);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: #ffffff;
+  color: #000000;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
