@@ -4,6 +4,7 @@ import type { Property } from "@/data/properties";
 import { useBooking } from "@/hooks/useBooking";
 import { formatDate } from "@/lib/contact";
 import { formatPrice } from "@/lib/format";
+import { weekdayRateLabel } from "@/lib/pricing";
 import { WhatsAppButton } from "./ContactButtons";
 
 // Sticky footer on small screens, where the booking card sits far down the page.
@@ -15,6 +16,7 @@ export function MobileBookingBar({ property }: { property: Property }) {
       <div>
         <p>
           <span className="font-semibold">{formatPrice(property.pricePerNight)}</span> night
+          {property.weekdayRate && <span className="text-sm text-muted"> · {weekdayRateLabel(property)}</span>}
         </p>
         <a href="#booking" className="text-sm underline">
           {checkIn && checkOut ? `${formatDate(checkIn)} – ${formatDate(checkOut)}` : "Choose dates"}

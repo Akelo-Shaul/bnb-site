@@ -28,8 +28,8 @@ export function Hero() {
     <section ref={root} className="relative isolate flex h-svh flex-col overflow-hidden">
       {/* Always exactly one screen tall; the cards shrink to fit shorter screens. */}
       <Image
-        src="/images/hero.jpg"
-        alt="Shalom Gardens apartment buildings"
+        src="/images/hero-living.jpg"
+        alt="Living room in a Shalom Gardens apartment"
         fill
         priority
         sizes="100vw"

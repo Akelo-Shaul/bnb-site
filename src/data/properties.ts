@@ -7,8 +7,8 @@ import type { IconName } from "@/components/ui/Icon";
 // photos into /public/images (videos into /public/videos). Media is listed
 // per room in `tour` (photos as paths, videos via `vid()`); the first photo is
 // the card cover. Missing photos render as grey placeholders.
-// PLACEHOLDER MEDIA: the same photos/videos are reused across rooms and
-// properties until the owner's real ones arrive.
+// MEDIA: the owner's own photos/videos (Oct 2026), one folder per property.
+// The 1-bedroom only came as a video, so its photos are stills from it.
 // ─────────────────────────────────────────────────────────────────────────────
 
 export type Review = {
@@ -29,6 +29,8 @@ export type Property = {
   location: string;
   type: string;
   pricePerNight: number;
+  /** Different nightly rate on some weekdays (0 = Sunday … 6 = Saturday), keyed by the night's start date. */
+  weekdayRate?: { days: number[]; price: number; label: string };
   cleaningFee: number;
   rating: number;
   reviewCount: number;
@@ -103,7 +105,8 @@ export const properties: Property[] = [
     town: "Kisumu",
     location: "Milimani, Kisumu, Kenya",
     type: "Entire home",
-    pricePerNight: 500,
+    pricePerNight: 6000,
+    weekdayRate: { days: [1, 2, 3], price: 5000, label: "Mon–Wed" },
     cleaningFee: 0,
     rating: 5.0,
     reviewCount: 318,
@@ -113,13 +116,12 @@ export const properties: Property[] = [
     beds: 5,
     baths: 3,
     perks: ["WiFi", "Kitchen", "Free Parking"],
-    video: { src: "/videos/living-stairs.mp4", poster: img("living-stairs-poster.jpg") },
     tour: [
-      { room: "Living room", media: [img("sunset-lounge.jpg"), vid("living-stairs"), img("city-lounge.jpg"), img("living-workspace.jpg"), vid("living-arch")] },
-      { room: "Full kitchen", media: [vid("dining"), img("dining-poster.jpg"), img("living-stairs-poster.jpg")] },
-      { room: "Bedroom", media: [img("bedroom-poster.jpg"), vid("bedroom"), img("garden-study.jpg")] },
-      { room: "Study", media: [img("glass-study.jpg"), img("garden-study.jpg"), img("living-workspace.jpg")] },
-      { room: "Exterior", media: [img("hero.jpg"), vid("exterior"), img("exterior-poster.jpg")] },
+      { room: "Living room", media: [img("harmes/living-2.jpg"), img("harmes/living-1.jpg"), img("harmes/living-3.jpg")] },
+      { room: "Dining area", media: [img("harmes/dining-2.jpg"), img("harmes/dining-1.jpg")] },
+      { room: "Full kitchen", media: [img("harmes/kitchen-1.jpg"), img("harmes/kitchen-2.jpg")] },
+      { room: "Bedrooms", media: [img("harmes/bedroom-1.jpg"), img("harmes/bedroom-5.jpg"), img("harmes/bedroom-4.jpg"), img("harmes/bedroom-3.jpg"), img("harmes/bedroom-2.jpg")] },
+      { room: "Bathroom", media: [img("harmes/bathroom-1.jpg")] },
     ],
     description:
       "A bright three-bedroom apartment with floor-to-ceiling windows and sunset views over the city. The open-plan lounge flows into a fully equipped kitchen, and every bedroom has fresh linen and plenty of storage. Close to shops, restaurants and the lakefront, with secure parking on site.",
@@ -130,9 +132,9 @@ export const properties: Property[] = [
       { icon: "calendar", title: "Flexible dates", text: "Message us to confirm availability for your dates." },
     ],
     sleeping: [
-      { room: "Bedroom 1", beds: "1 king bed", image: img("bedroom-poster.jpg") },
-      { room: "Bedroom 2", beds: "2 single beds" },
-      { room: "Bedroom 3", beds: "1 queen bed, 1 sofa bed" },
+      { room: "Bedroom 1", beds: "1 king bed", image: img("harmes/bedroom-1.jpg") },
+      { room: "Bedroom 2", beds: "2 single beds", image: img("harmes/bedroom-4.jpg") },
+      { room: "Bedroom 3", beds: "1 queen bed, 1 sofa bed", image: img("harmes/bedroom-2.jpg") },
     ],
     amenities: [
       { icon: "wifi", label: "Fast WiFi" },
@@ -165,7 +167,7 @@ export const properties: Property[] = [
     town: "Kisumu",
     location: "Riat Hills, Kisumu, Kenya",
     type: "Entire apartment",
-    pricePerNight: 500,
+    pricePerNight: 4000,
     cleaningFee: 0,
     rating: 4.9,
     reviewCount: 124,
@@ -175,12 +177,13 @@ export const properties: Property[] = [
     beds: 3,
     baths: 2,
     perks: ["WiFi", "Kitchen", "Lake view"],
-    video: { src: "/videos/bedroom.mp4", poster: img("bedroom-poster.jpg") },
+    video: { src: "/videos/lakeview/tour.mp4", poster: img("lakeview/tour-poster.jpg") },
     tour: [
-      { room: "Living room", media: [img("city-lounge.jpg"), vid("living-arch"), img("living-workspace.jpg"), img("sunset-lounge.jpg"), vid("living-stairs")] },
-      { room: "Bedroom", media: [vid("bedroom"), img("bedroom-poster.jpg"), img("garden-study.jpg")] },
-      { room: "Full kitchen", media: [img("dining-poster.jpg"), vid("dining")] },
-      { room: "Exterior", media: [img("exterior-poster.jpg"), vid("exterior"), img("hero.jpg")] },
+      { room: "Living room", media: [img("lakeview/living-1.jpg"), vid("lakeview/tour"), img("lakeview/living-2.jpg"), img("lakeview/living-3.jpg")] },
+      { room: "Dining area", media: [img("lakeview/dining-1.jpg"), img("lakeview/dining-2.jpg")] },
+      { room: "Bedroom", media: [img("lakeview/bedroom-1.jpg")] },
+      { room: "Full kitchen", media: [img("lakeview/kitchen-1.jpg")] },
+      { room: "Bathroom", media: [img("lakeview/bathroom-1.jpg")] },
     ],
     description:
       "A calm two-bedroom apartment with views towards Lake Victoria. Ideal for couples, small families or work trips, with a dedicated workspace and fast WiFi.",
@@ -190,7 +193,7 @@ export const properties: Property[] = [
       { icon: "door", title: "Easy check-in", text: "Our caretaker meets you and hands over the keys." },
     ],
     sleeping: [
-      { room: "Bedroom 1", beds: "1 queen bed", image: img("bedroom-poster.jpg") },
+      { room: "Bedroom 1", beds: "1 queen bed", image: img("lakeview/bedroom-1.jpg") },
       { room: "Bedroom 2", beds: "2 single beds" },
     ],
     amenities: [
@@ -212,12 +215,12 @@ export const properties: Property[] = [
     cancellation: "Free cancellation up to 48 hours before check-in.",
   }),
   define({
-    slug: "garden-studio",
-    name: "Garden Studio, Kisumu, studio",
+    slug: "garden-suite",
+    name: "Garden Suite, Kisumu, 1 bedroom",
     town: "Kisumu",
     location: "Tom Mboya, Kisumu, Kenya",
-    type: "Entire studio",
-    pricePerNight: 500,
+    type: "Entire apartment",
+    pricePerNight: 3000,
     cleaningFee: 0,
     rating: 4.8,
     reviewCount: 86,
@@ -226,26 +229,26 @@ export const properties: Property[] = [
     bedrooms: 1,
     beds: 1,
     baths: 1,
-    perks: ["WiFi", "Kitchenette", "Garden"],
-    video: { src: "/videos/hallway.mp4", poster: img("hallway-poster.jpg") },
+    perks: ["WiFi", "Kitchen", "Smart TV"],
+    video: { src: "/videos/garden/tour.mp4", poster: img("garden/tour-poster.jpg") },
     tour: [
-      { room: "Studio", media: [img("garden-study.jpg"), vid("hallway"), img("glass-study.jpg"), img("living-workspace.jpg"), img("hallway-poster.jpg")] },
-      { room: "Lounge", media: [img("living-arch-poster.jpg"), vid("living-arch"), img("city-lounge.jpg")] },
-      { room: "Bedroom", media: [img("bedroom-poster.jpg"), vid("bedroom")] },
-      { room: "Exterior", media: [img("hero.jpg"), vid("exterior")] },
+      { room: "Living room", media: [img("garden/living-1.jpg"), vid("garden/tour"), img("garden/living-2.jpg"), img("garden/living-3.jpg"), img("garden/entrance-1.jpg")] },
+      { room: "Bedroom", media: [img("garden/bedroom-1.jpg")] },
+      { room: "Kitchen", media: [img("garden/kitchen-1.jpg")] },
+      { room: "Bathroom", media: [img("garden/bathroom-1.jpg")] },
     ],
     description:
-      "A cosy studio opening onto a shared garden. Everything you need for a short stay, with a kitchenette, a comfortable queen bed and fast WiFi.",
+      "A cosy one-bedroom apartment with a bright living room. Everything you need for a short stay, with a kitchen, a comfortable queen bed and fast WiFi.",
     highlights: [
-      { icon: "home", title: "Entire studio", text: "You'll have the studio to yourself." },
+      { icon: "home", title: "Entire apartment", text: "You'll have the apartment to yourself." },
       { icon: "leaf", title: "Garden access", text: "Relax outside in the shared garden." },
     ],
-    sleeping: [{ room: "Studio", beds: "1 queen bed" }],
+    sleeping: [{ room: "Bedroom", beds: "1 queen bed", image: img("garden/bedroom-1.jpg") }],
     amenities: [
       { icon: "wifi", label: "Fast WiFi" },
-      { icon: "kitchen", label: "Kitchenette" },
+      { icon: "kitchen", label: "Kitchen" },
       { icon: "parking", label: "Free parking" },
-      { icon: "leaf", label: "Garden" },
+      { icon: "tv", label: "Smart TV" },
     ],
     ratings: sampleRatings,
     reviews: [

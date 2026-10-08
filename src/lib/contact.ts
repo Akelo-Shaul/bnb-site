@@ -1,5 +1,6 @@
 import { site } from "@/data/site";
 import { formatPrice, nightsBetween, plural } from "@/lib/format";
+import { costBreakdown, stayCost, weekdayRateLabel } from "@/lib/pricing";
 import { publicSiteUrl } from "@/lib/site-url";
 import type { Property } from "@/data/properties";
 
@@ -30,7 +31,7 @@ export function whatsappDisplay() {
 
 export type BookingRequest = {
   property?: Pick<Property, "name" | "slug"> &
-    Partial<Pick<Property, "location" | "pricePerNight" | "cleaningFee">>;
+    Partial<Pick<Property, "location" | "pricePerNight" | "cleaningFee" | "weekdayRate">>;
   checkIn?: string;
   checkOut?: string;
   guests?: number;
@@ -56,13 +57,12 @@ export function bookingMessage({ property, checkIn, checkOut, guests }: BookingR
   if (guests) details.push(`Guests: ${guests}`);
   if (property?.pricePerNight) {
     if (nights > 0) {
-      const total = nights * property.pricePerNight + (property.cleaningFee ?? 0);
+      const { lines, total } = stayCost({ ...property, pricePerNight: property.pricePerNight }, checkIn, checkOut);
       const fee = property.cleaningFee ? ` + ${formatPrice(property.cleaningFee)} cleaning` : "";
-      details.push(
-        `Estimated total: ${formatPrice(total)} (${formatPrice(property.pricePerNight)} × ${plural(nights, "night")}${fee})`,
-      );
+      details.push(`Estimated total: ${formatPrice(total)} (${costBreakdown(lines)}${fee})`);
     } else {
-      details.push(`Rate: ${formatPrice(property.pricePerNight)} / night`);
+      const weekdayRate = weekdayRateLabel(property);
+      details.push(`Rate: ${formatPrice(property.pricePerNight)} / night${weekdayRate ? ` (${weekdayRate})` : ""}`);
     }
   }
   if (details.length) lines.push("", ...details.map((d) => `• ${d}`));

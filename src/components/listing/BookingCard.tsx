@@ -3,15 +3,16 @@
 import type { Property } from "@/data/properties";
 import { useBooking } from "@/hooks/useBooking";
 import { useToday } from "@/hooks/useToday";
-import { formatPrice, nightsBetween, plural } from "@/lib/format";
+import { formatPrice, plural } from "@/lib/format";
+import { stayCost, weekdayRateLabel } from "@/lib/pricing";
 import { Icon } from "@/components/ui/Icon";
 import { InstagramButton, WhatsAppButton } from "./ContactButtons";
 
 export function BookingCard({ property, id }: { property: Property; id?: string }) {
   const { checkIn, checkOut, guests, setCheckIn, setCheckOut, setGuests } = useBooking();
   const today = useToday() || undefined;
-  const nights = nightsBetween(checkIn, checkOut);
-  const subtotal = nights * property.pricePerNight;
+  const { nights, lines, total } = stayCost(property, checkIn, checkOut);
+  const weekdayRate = weekdayRateLabel(property);
   const request = {
     property,
     checkIn: checkIn || undefined,
@@ -25,6 +26,7 @@ export function BookingCard({ property, id }: { property: Property; id?: string 
         <p>
           <span className="font-price text-[22px] font-bold">{formatPrice(property.pricePerNight)}</span>
           <span className="text-muted"> / night</span>
+          {weekdayRate && <span className="block text-sm text-muted">{weekdayRate}</span>}
         </p>
         <a href="#reviews" className="flex items-center gap-1 text-sm">
           <Icon name="star" className="size-3.5 text-brand" />
@@ -80,12 +82,14 @@ export function BookingCard({ property, id }: { property: Property; id?: string 
 
       {nights > 0 && (
         <dl className="mt-6 space-y-3 text-[15px]">
-          <div className="flex justify-between">
-            <dt className="underline">
-              {formatPrice(property.pricePerNight)} × {plural(nights, "night")}
-            </dt>
-            <dd>{formatPrice(subtotal)}</dd>
-          </div>
+          {lines.map((l) => (
+            <div key={l.price} className="flex justify-between">
+              <dt className="underline">
+                {formatPrice(l.price)} × {plural(l.nights, "night")}
+              </dt>
+              <dd>{formatPrice(l.price * l.nights)}</dd>
+            </div>
+          ))}
           {property.cleaningFee > 0 && (
             <div className="flex justify-between">
               <dt className="underline">Cleaning fee</dt>
@@ -94,7 +98,7 @@ export function BookingCard({ property, id }: { property: Property; id?: string 
           )}
           <div className="flex justify-between border-t border-line pt-4 font-semibold">
             <dt>Estimated total</dt>
-            <dd>{formatPrice(subtotal + property.cleaningFee)}</dd>
+            <dd>{formatPrice(total)}</dd>
           </div>
         </dl>
       )}

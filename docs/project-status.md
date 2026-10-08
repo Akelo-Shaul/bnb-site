@@ -1,6 +1,6 @@
 # Project status & hand-off
 
-_Last updated: 2026-09-28 · version 0.1.0 + unreleased changes (see CHANGELOG)_
+_Last updated: 2026-10-08 · version 0.1.0 + unreleased changes (see CHANGELOG)_
 
 Start here to find out where the project stands. It covers what has been built, what was decided and why, what is still placeholder, and what to do next.
 
@@ -44,15 +44,15 @@ One page is generated per entry in `src/data/properties.ts`. Unknown slugs retur
 1. The guest picks dates and a guest count (booking card or calendar; both share state through `useBooking`).
 2. **Book on WhatsApp** opens `wa.me/<number>?text=…` with a message such as:
    ```
-   Hi Shalom Gardens! I'd like to book *Harmes Apartments, Kisumu, 3 bedroom* (Milimani, Kisumu, Kenya).
+   Hi Shalom Gardens! I'd like to book *Lakeview Suite, Kisumu, 2 bedroom* (Riat Hills, Kisumu, Kenya).
 
    • Check-in: Sat, 3 Oct 2026
    • Check-out: Tue, 6 Oct 2026
    • Duration: 3 nights
    • Guests: 4
-   • Estimated total: Ksh 1,500 (Ksh 500 × 3 nights)
+   • Estimated total: Ksh 12,000 (Ksh 4,000 × 3 nights)
 
-   Listing: https://<NEXT_PUBLIC_SITE_URL>/properties/harmes-apartments   ← only when the env var is set
+   Listing: https://<NEXT_PUBLIC_SITE_URL>/properties/lakeview-suite   ← only when the env var is set
 
    Is it available for these dates?
    ```
@@ -94,17 +94,17 @@ One page is generated per entry in `src/data/properties.ts`. Unknown slugs retur
 ## 5. Placeholder content (must be replaced before launch)
 
 - [x] **WhatsApp number & socials.** Set 2026-09-28: WhatsApp `254115089122`, socials from shaulakelo.com (`src/data/site.ts`); TikTok is still a placeholder. Confirm these are the owner's booking contacts and not just the developer's.
-- [ ] **All property data** in `src/data/properties.ts`: names, locations, prices (all `Ksh 500`), descriptions, rooms, amenities, rules.
+- [ ] **All property data** in `src/data/properties.ts`: names, locations, descriptions, bed/bath counts, amenities, rules. Prices are real since 2026-10-08 (1 bed Ksh 3,000; 2 bed Ksh 4,000; 3 bed Ksh 6,000, Ksh 5,000 Mon–Wed nights via `weekdayRate`). Names (Harmes / Lakeview Suite / Garden Suite) are still the sample ones; confirm with the owner.
 - [ ] **Ratings, review counts and reviews.** Currently sample values and "Sample guest" placeholder reviews. Use real ones only.
-- [ ] **Photos.** Only two exist (`hero.jpg` building, `sunset-lounge.jpg` lounge). The third property has none, and gallery/listing slots show "Photo coming soon".
+- [x] **Photos.** Owner's own media added 2026-10-08 (from `~/Downloads/3bed`, `2bd`, `1bed`): 3 bed = 13 photos (no video), 2 bed = 8 photos + video, 1 bed = video only, so its photos are stills grabbed from the video (lower resolution, 464px wide). Ask for real 1-bedroom photos and a 3-bedroom video. Room groupings were guessed from the pictures; the five 3-bed bedroom photos may not be three distinct rooms.
 - [ ] **Host details** in `src/data/site.ts`: name ("Shalom" is assumed), bio, "Hosting since", response time, avatar photo.
 - [ ] **Property count.** The owner has more than three BnBs, but only three sample entries exist.
-- [ ] **Hero image licence.** `hero.jpg` carries a "2023 Rawpixel Ltd." copyright tag. Confirm the licence or replace it with the owner's own photo.
+- [x] **Hero image.** The Rawpixel stock photo was replaced with the owner's 3-bed lounge (`hero-living.jpg`, 2026-10-08). It's a portrait phone photo cropped to landscape; a wide exterior or lounge shot would look sharper.
 - [ ] **Favicon.** Still the default Next.js `src/app/favicon.ico`.
-- [x] **Gallery/listing media.** 6 client videos + 4 interior photos added (2026-09-28). Photos are shared across properties for now; each property should get its own.
-- [ ] **Media licences.** The videos look like Pexels stock (filenames like `7239170-uhd_3840_2160_25fps.mp4`) and the photos look like Pinterest saves. Confirm they may be used commercially, or replace them with the owner's own.
+- [x] **Gallery/listing media.** Each property now has its own media (2026-10-08); the old shared stock media was deleted.
+- [x] **Media licences.** Stock/Pinterest media removed 2026-10-08; everything is now the owner's own.
 - [ ] **TikTok handle.** Placeholder `shalomgardens`. Set `NEXT_PUBLIC_TIKTOK_HANDLE` or `site.tiktokHandle`.
-- [ ] **Room photos.** Only "Bedroom 1" cards have a photo (a video frame). Add `sleeping[].image` for the rest.
+- [x] **Room photos.** Every "Where you'll sleep" card has a photo except Lakeview Bedroom 2 (no second-bedroom photo was supplied).
 - Note: `~/Downloads/Pasted image.png` (a university fees statement) and `~/Videos/Screencasts` (personal recordings) were deliberately **not** used.
 
 ## 6. Next steps (suggested order)

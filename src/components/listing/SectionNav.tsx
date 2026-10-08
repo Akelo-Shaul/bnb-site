@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import type { Property } from "@/data/properties";
 import { useBooking } from "@/hooks/useBooking";
 import { formatPrice, nightsBetween, plural } from "@/lib/format";
+import { stayCost } from "@/lib/pricing";
 import { Icon } from "@/components/ui/Icon";
 import { WhatsAppButton } from "./ContactButtons";
 
@@ -90,7 +91,7 @@ export function SectionNav({ property }: { property: Property }) {
           <div className="text-sm leading-tight">
             {nights > 0 ? (
               <p>
-                <span className="font-semibold underline">{formatPrice(nights * property.pricePerNight + property.cleaningFee)}</span>{" "}
+                <span className="font-semibold underline">{formatPrice(stayCost(property, checkIn, checkOut).total)}</span>{" "}
                 <span className="text-ink-soft">for {plural(nights, "night")}</span>
               </p>
             ) : (

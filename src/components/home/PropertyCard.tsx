@@ -7,13 +7,16 @@ import type { Property } from "@/data/properties";
 import { useSavedProperties } from "@/hooks/useSavedProperties";
 import { bookingMessage, whatsappLink } from "@/lib/contact";
 import { plural } from "@/lib/format";
+import { weekdayRateLabel } from "@/lib/pricing";
 import { PhotoTile } from "@/components/ui/PhotoTile";
 
 // Glass listing card from Figma ("Component 3"), 330 × 439.
 export function PropertyCard({ property }: { property: Property }) {
   const { isSaved, toggle } = useSavedProperties();
   const saved = isSaved(property.slug);
+  const weekdayRate = weekdayRateLabel(property);
   const features = [
+    ...(weekdayRate ? [weekdayRate] : []),
     property.guestsLabel,
     property.type,
     plural(property.beds, "bed"),
