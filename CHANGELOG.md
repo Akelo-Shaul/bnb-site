@@ -25,6 +25,7 @@
 - **Owner's real media and prices (2026-10-08).** All placeholder photos/videos (stock videos, Pinterest photos, Rawpixel hero) deleted and replaced with the owner's own: 3-bedroom (Harmes) 13 photos, 2-bedroom (Lakeview) 8 photos + a 72s video tour, 1-bedroom 1 video tour plus 7 stills taken from it. Media now lives per property in `public/images/<property>/` and `public/videos/<property>/`; photos were stripped of EXIF (including GPS) and resized to ≤1600px, videos re-encoded for the web (H.264, faststart, 64k audio). New hero `hero-living.jpg` (3-bedroom lounge). Gallery rebuilt from the new media.
 - Prices: 1 bedroom Ksh 3,000, 2 bedroom Ksh 4,000, 3 bedroom Ksh 6,000 (Ksh 5,000 for Monday–Wednesday nights). New optional `weekdayRate` on a property; `src/lib/pricing.ts` prices a stay night by night (keyed by each night's start date), and the booking card, section nav, mobile bar, property card and WhatsApp message all show it (e.g. "Ksh 6,000 × 2 nights + Ksh 5,000 × 3 nights").
 - The third listing is now a **1 bedroom** ("Garden Suite", slug `garden-suite`, was `garden-studio`).
+- Units are shown in the order 3 bedroom, 1 bedroom, 2 bedroom: property cards follow that order, and every gallery tile lists one item per unit in that order, so the gallery always shows one unit at a time (all five tiles slide to the next unit together).
 - Next: more client-specified GSAP animations, real content (see `docs/project-status.md`).
 
 ## 0.1.0 — 2026-09-28
